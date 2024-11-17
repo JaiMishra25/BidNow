@@ -1,0 +1,73 @@
+<div class="login-container">
+    <a class="back-home" routerLink="/">
+        <span class="back-icon">←</span>
+        <span class="back-text">Home</span>
+    </a>
+
+    <div class="content-wrapper">
+        <h2>Welcome Back!</h2>
+        <p class="subtitle">Please enter your details to sign in</p>
+
+        <form (ngSubmit)="onLogin(loginForm)" #loginForm="ngForm" novalidate>
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <div class="input-container">
+                    <i class="fas fa-envelope"></i>
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        [(ngModel)]="email"
+                        required
+                        email
+                        #emailField="ngModel"
+                        placeholder="Enter your email"
+                    />
+                </div>
+                <div *ngIf="emailField.invalid && emailField.touched" class="error">
+                    Please enter a valid email address.
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <div class="input-container">
+                    <i class="fas fa-lock"></i>
+                    <input
+                        type="password"
+                        id="password"
+                        name="password"
+                        [(ngModel)]="password"
+                        required
+                        #passwordField="ngModel"
+                        placeholder="Enter your password"
+                    />
+                </div>
+                <div *ngIf="passwordField.invalid && passwordField.touched" class="error">
+                    Password is required.
+                </div>
+            </div>            
+
+            <div class="form-options">
+                <label class="remember-me">
+                    <input type="checkbox" [(ngModel)]="rememberMe" name="rememberMe">
+                    <span>Remember me</span>
+                </label>
+                <a routerLink="/password-recovery" class="forgot-password">Forgot Password?</a>
+            </div>
+
+            <button type="submit" [disabled]="loginForm.invalid || isLoading">
+                <span *ngIf="!isLoading">Login</span>
+                <div *ngIf="isLoading" class="loader"></div>
+            </button>
+        </form>
+
+        <div class="signup-prompt">
+            <span>Don't have an account?</span>
+            <a routerLink="/signup" class="signup-link">Sign up</a>
+        </div>
+
+        <div *ngIf="successMessage" class="success message-animation">{{ successMessage }}</div>
+        <div *ngIf="errorMessage" class="error message-animation">{{ errorMessage }}</div>
+    </div>
+</div>

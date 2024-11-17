@@ -1,0 +1,91 @@
+<!-- Navigation Bar -->
+<div class="navbar">
+  <div class="logo">BidNow</div>
+  <div class="search-container">
+    <input
+      class="search-bar"
+      type="text"
+      placeholder="Search auctions, categories, or items..."
+      (input)="onSearch($event)"
+    />
+  </div>
+  <button class="logout" (click)="logout()">Logout</button>
+</div>
+
+<!-- Header -->
+<div class="header">
+  <h1>
+    Discover Your Next Treasure with BidNow
+    
+  </h1>
+  <p>Your gateway to exclusive auctions</p>
+</div>
+
+
+<!-- Auction Listings -->
+<div class="container">
+
+  <!-- Current Auctions -->
+  <div class="auction-section">
+    <h2>Live Auctions</h2>
+    <div class="auction-list">
+      <div class="auction-item" *ngFor="let auction of filteredCurrentAuctions">
+        <img [src]="auction.imageUrl || 'assets/placeholder.jpg'" alt="{{ auction.title }}" />
+        <div class="details">
+          <h3>{{ auction.title }}</h3>
+          <p><strong>Current Bid:</strong> {{ auction.currentBid || 'No bids yet' }}</p>
+          <p><strong>Ends in:</strong> {{ auction.timeLeft }}</p>
+          <button class="action-btn" (click)="onPlaceBid(auction)">Place Bid</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    <!-- Upcoming Auctions -->
+    <div class="auction-section">
+      <h2>Upcoming Auctions</h2>
+      <div class="auction-list">
+        <div class="auction-item" *ngFor="let auction of filteredUpcomingAuctions">
+          <img [src]="auction.imageUrl || 'assets/placeholder.jpg'" alt="{{ auction.title }}" />
+          <div class="details">
+            <h3>{{ auction.title }}</h3>
+            <p>{{ auction.info || 'Details will be revealed soon!' }}</p>
+            <p><strong>Starts in:</strong> {{ auction.timeLeft }}</p>
+            <button class="action-btn" (click)="onBid(auction)">Set Reminder</button>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+
+<footer class="footer">
+  <div class="footer-content">
+    <div class="footer-section">
+      <h3>About Us</h3>
+      <ul>
+        <li><a href="#">Our Story</a></li>
+        <li><a href="#">Team</a></li>
+        <li><a href="#">Careers</a></li>
+      </ul>
+    </div>
+    <div class="footer-section">
+      <h3>Support</h3>
+      <ul>
+        <li><a href="#">Help Center</a></li>
+        <li><a href="#">Contact Us</a></li>
+        <li><a href="#">FAQ</a></li>
+      </ul>
+    </div>
+    <div class="footer-section">
+      <h3>Legal</h3>
+      <ul>
+        <li><a href="#">Privacy Policy</a></li>
+        <li><a href="#">Terms of Service</a></li>
+        <li><a href="#">Cookie Policy</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2024 Your Company. All rights reserved.</p>
+  </div>
+</footer>
