@@ -1,7 +1,7 @@
 /* Global Styles */
 :host {
-  --primary-color: #e9def7;
-  --secondary-color: #d5b7fb;
+  --primary-color: #f2eef9;
+  --secondary-color: #dec9fa;
   --accent-color: #9D00FF;
   --text-primary: #1A0B2E;
   --text-secondary: #4A3B5E;
@@ -11,6 +11,7 @@
   background-color: var(--secondary-color);
   color: var(--text-primary);
   font-family: 'Inter', sans-serif;
+  font-weight: 400;
 }
 
 /* General Styling */
@@ -86,6 +87,7 @@ body {
   padding: 0.7rem 1.2rem;
   font-size: 0.9rem;
   font-weight: 700;
+  margin: 20px;
   border: none;
   border-radius: 25px;
   cursor: pointer;
@@ -534,4 +536,140 @@ body {
   .footer-content {
     grid-template-columns: 1fr;
   }
+}
+
+/* Navigation Bar Styles */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--accent-color);
+  padding: 10px 20px;
+  color: white;
+  font-weight: 600;
+}
+
+.add-auction-btn {
+  background: linear-gradient(135deg, #ff3e3e, var(--accent-color));
+  color: white;
+  padding: 0.7rem 1.2rem;
+  font-size: 0.9rem;
+  font-weight: 700;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: all 0.4s ease-in-out;
+  box-shadow: 0 6px 12px rgba(255, 62, 62, 0.2);
+  position: relative;
+  overflow: hidden;
+}
+
+.add-auction-btn:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transition: 0.6s;
+}
+
+.add-auction-btn:hover:before {
+  left: 100%;
+}
+
+.add-auction-btn:hover {
+  background: linear-gradient(135deg, #ff2424, #7b00cc);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 15px rgba(255, 62, 62, 0.3);
+}
+
+/* Add Auction Modal Styles */
+.add-auction-modal {
+  background: var(--secondary-color);
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  max-width: 500px;
+  margin: auto;
+  color: var(--text-primary);
+  font-weight: 500;
+}
+
+.add-auction-modal h2 {
+  margin-bottom: 15px;
+  color: var(--text-primary);
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  font-size: 14px;
+  margin-bottom: 5px;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 8px;
+  font-size: 14px;
+  font-weight: 400;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  border-color: var(--accent-color);
+}
+
+/* Image preview styles */
+.preview-image {
+  max-width: 100px;
+  max-height: 100px;
+  margin-top: 10px;
+}
+
+/* Form Actions Styles */
+.form-actions {
+  display: flex;
+  justify-content: space-between;
+}
+
+.submit-btn {
+  background-color: var(--success-color);
+  color: white;
+  padding: 10px 15px;
+  font-size: 1rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.submit-btn:hover {
+  background-color: #27ae60;
+}
+
+.cancel-btn {
+  background-color: #e74c3c;
+  color: white;
+  padding: 10px 15px;
+  font-size: 1rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.cancel-btn:hover {
+  background-color: #c0392b;
 }
