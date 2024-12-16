@@ -1,0 +1,111 @@
+:host .user-detail-container {
+    max-width: 800px;
+    margin: 0 auto;
+    background-color: white;
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    padding: 30px;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+:host .user-detail-container::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+        45deg, 
+        transparent, 
+        rgba(52, 152, 219, 0.1), 
+        transparent
+    );
+    transform: rotate(-45deg);
+    transition: transform 0.6s ease;
+}
+
+:host .user-detail-container:hover::before {
+    transform: rotate(45deg);
+}
+
+:host .user-detail-container:hover {
+    transform: scale(1.02);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+}
+
+:host .user-detail-container .user-info {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+:host .user-detail-container .user-info p {
+    background-color: #f9f9f9;
+    padding: 12px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    transition: all 0.3s ease;
+    border: 1px solid transparent;
+}
+
+:host .user-detail-container .user-info p:hover {
+    background-color: #3498db;
+    color: white;
+    transform: translateY(-5px);
+    border-color: #2980b9;
+}
+
+:host .user-detail-container .user-info p strong {
+    color: #3498db;
+    margin-right: 10px;
+    min-width: 100px;
+}
+
+:host .user-detail-container table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 10px;
+}
+
+:host .user-detail-container h1 {
+    color: #3498db;
+    text-align: center;
+    border-bottom: 3px solid #3498db;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    position: relative;
+}
+
+:host .user-detail-container h1::after {
+    content: '';
+    position: absolute;
+    bottom: -3px;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(
+        to right, 
+        transparent, 
+        #3498db, 
+        transparent
+    );
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+}
+
+:host .user-detail-container h1:hover::after {
+    transform: scaleX(1);
+}
+
+@media (max-width: 600px) {
+    :host .user-detail-container .user-info {
+        grid-template-columns: 1fr;
+    }
+}

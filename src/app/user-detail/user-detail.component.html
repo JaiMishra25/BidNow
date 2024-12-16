@@ -1,0 +1,29 @@
+<div class="user-detail-container">
+    <h1>User Details</h1>
+    <div class="user-info">
+      <p><strong>Name:</strong> {{ userDetails.name }}</p>
+      <p><strong>Address:</strong> {{ userDetails.address }}</p>
+      <p><strong>Email:</strong> {{ userDetails.email }}</p>
+      <p><strong>Phone:</strong> {{ userDetails.phone }}</p>
+      <p><strong>Bids Participated:</strong> {{ userDetails.numberOfBids }}</p>
+    </div>
+  
+    <div class="auction-history">
+      <h2>Auctions Participated</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let auction of userDetails.participatedAuctions">
+            <td>{{ auction.title }}</td>
+            <td>{{ auction.status }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  

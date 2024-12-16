@@ -59,8 +59,8 @@
           <p><strong>Current Bid:</strong> ${{ auction.currentBid || 'No bids yet' }}</p>
           <p><strong>Ends in:</strong> {{ auction.timeLeft }}</p>
           <div class="auction-actions">
+            <button class="action-btn" (click)="viewAuctionDetail(auction)">View Details</button>
             <button class="action-btn place-bid" (click)="onPlaceBid(auction)">Place Bid</button>
-            <button class="action-btn delete" (click)="deleteAuction(auction)">Delete</button>
           </div>
         </div>
       </div>
@@ -78,8 +78,8 @@
           <p>{{ auction.info || 'Details will be revealed soon!' }}</p>
           <p><strong>Starts in:</strong> {{ auction.timeLeft }}</p>
           <div class="auction-actions">
+            <button class="action-btn" (click)="viewAuctionDetail(auction)">View Details</button>
             <button class="action-btn reminder" (click)="onBid(auction)">Set Reminder</button>
-            <button class="action-btn delete" (click)="deleteAuction(auction)">Delete</button>
           </div>
         </div>
       </div>

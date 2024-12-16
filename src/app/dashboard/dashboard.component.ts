@@ -1,20 +1,22 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
+import { MatSnackBarModule, MatSnackBar } from '@angular/material/snack-bar';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { MatSnackBarModule, MatSnackBar } from '@angular/material/snack-bar';
+import { AuctionService } from '../auction.service'; // Import AuctionService
 
 interface Auction {
-  id?: string;
+  id: string;
   title: string;
   imageUrl?: string;
-  info?: string;
+  info: string;
   timeLeft: string;
   startTime?: Date;
   endTime?: Date;
   currentBid?: number;
   minimumBid?: number;
   seller?: string;
+  status: 'ongoing' | 'upcoming' | 'past';
 }
 
 @Component({
@@ -27,107 +29,43 @@ interface Auction {
 export class DashboardComponent implements OnInit, OnDestroy {
   upcomingAuctions: Auction[] = [];
   currentAuctions: Auction[] = [];
-  searchQuery: string = '';
   filteredUpcomingAuctions: Auction[] = [];
   filteredCurrentAuctions: Auction[] = [];
+  searchQuery: string = '';
   timerInterval: any;
 
   // For adding and managing auctions
   newAuction: Auction = {
+    id:'',
     title: '',
     info: '',
     currentBid: 0,
     minimumBid: 0,
     imageUrl: '',
     timeLeft: '',
+    status: 'upcoming'
   };
   showAddAuctionForm: boolean = false;
 
-  constructor(private router: Router, private snackBar: MatSnackBar) {}
+  constructor(
+    private router: Router,
+    private snackBar: MatSnackBar,
+    private auctionService: AuctionService // Inject AuctionService
+  ) {}
 
   ngOnInit(): void {
-    this.generateDynamicAuctions();
-    this.filteredUpcomingAuctions = [...this.upcomingAuctions];
-    this.filteredCurrentAuctions = [...this.currentAuctions];
-    this.timerInterval = setInterval(() => this.updateTimers(), 1000);
-  }
+    // Fetch data from the AuctionService
+    this.auctionService.upcomingAuctions$.subscribe((auctions) => {
+      this.upcomingAuctions = auctions;
+      this.filteredUpcomingAuctions = [...this.upcomingAuctions];
+    });
 
-  generateDynamicAuctions(): void {
-    const now = new Date();
-    // Upcoming Auctions
-    this.upcomingAuctions = [
-      {
-        id: '1',
-        title: 'Painting Auction',
-        info: 'Starting at $100',
-        imageUrl: 'images/painting.jpg', // Image path for Painting Auction
-        startTime: new Date(now.getTime() + 2 * 24 * 60 * 60 * 1000),
-        timeLeft: '',
-      },
-      {
-        id: '2',
-        title: 'Antique Auction',
-        info: 'Starting at $500',
-        imageUrl: 'images/antique.jpg', // Image path for Antique Auction
-        startTime: new Date(now.getTime() + 5 * 24 * 60 * 60 * 1000),
-        timeLeft: '',
-      },
-      {
-        id: '3',
-        title: 'Modern Art Auction',
-        info: 'Starting at $200',
-        imageUrl: 'images/digital-art.jpg', // Image path for Modern Art Auction
-        startTime: new Date(now.getTime() + 7 * 24 * 60 * 60 * 1000),
-        timeLeft: '',
-      },
-      {
-        id: '4',
-        title: 'Rare Collectibles Auction',
-        info: 'Starting at $1000',
-        imageUrl: 'images/clock.jpg', // Image path for Rare Collectibles Auction
-        startTime: new Date(now.getTime() + 10 * 24 * 60 * 60 * 1000),
-        timeLeft: '',
-      },
-    ];
-    // Current Auctions
-    this.currentAuctions = [
-      {
-        id: '5',
-        title: 'Car Auction',
-        info: 'Luxury cars on auction',
-        currentBid: 15000,
-        imageUrl: 'images/car.jpg', // Image path for Car Auction
-        endTime: new Date(now.getTime() + 1 * 24 * 60 * 60 * 1000),
-        timeLeft: '',
-      },
-      {
-        id: '6',
-        title: 'Jewelry Auction',
-        info: 'Exquisite jewelry pieces',
-        currentBid: 5000,
-        imageUrl: 'images/jewelry.jpg', // Image path for Jewelry Auction
-        endTime: new Date(now.getTime() + 12 * 60 * 60 * 1000), 
-        timeLeft: '',
-      },
-      {
-        id: '7',
-        title: 'Tech Gadgets Auction',
-        info: 'Latest gadgets at great prices',
-        currentBid: 2000,
-        imageUrl: 'images/tech.jpg', // Image path for Tech Gadgets Auction
-        endTime: new Date(now.getTime() + 2 * 24 * 60 * 60 * 1000),
-        timeLeft: '',
-      },
-      {
-        id: '8',
-        title: 'Luxury Watch Auction',
-        info: 'Rare luxury watches on sale',
-        currentBid: 8000,
-        imageUrl: 'images/luxury-watch.jpg', // Image path for Luxury Watch Auction
-        endTime: new Date(now.getTime() + 5 * 24 * 60 * 60 * 1000),
-        timeLeft: '',
-      },
-    ];
+    this.auctionService.currentAuctions$.subscribe((auctions) => {
+      this.currentAuctions = auctions;
+      this.filteredCurrentAuctions = [...this.currentAuctions];
+    });
+
+    this.timerInterval = setInterval(() => this.updateTimers(), 1000);
   }
 
   toggleAddAuctionForm(): void {
@@ -139,28 +77,30 @@ export class DashboardComponent implements OnInit, OnDestroy {
       this.snackBar.open('Please fill in all required fields.', 'Close', { duration: 3000 });
       return;
     }
+  
+    // Ensure the id is always a string when adding a new auction
     const newAuction: Auction = {
       ...this.newAuction,
-      id: `auction_${Date.now()}`,
+      id: `auction_${Date.now()}`, // Create a unique ID based on timestamp
       startTime: new Date(),
       timeLeft: '7d 0h 0m 0s',
+      info: this.newAuction.info || 'No additional information provided', // Fallback for info
+      status: 'upcoming', // Add the status property
     };
-    this.currentAuctions.push(newAuction);
+  
+    // Add auction to the service
+    this.auctionService.addAuction(newAuction);
+   
     this.filteredCurrentAuctions = [...this.currentAuctions];
+  
     this.toggleAddAuctionForm();
     this.snackBar.open('Auction added successfully!', 'Close', { duration: 3000 });
   }
+  
 
   deleteAuction(auction: Auction): void {
-    this.currentAuctions = this.currentAuctions.filter((a) => a.id !== auction.id);
-    this.upcomingAuctions = this.upcomingAuctions.filter((a) => a.id !== auction.id);
-    this.updateFilteredAuctions();
+    this.auctionService.deleteAuction(auction.id!);
     this.snackBar.open('Auction deleted successfully.', 'Close', { duration: 3000 });
-  }
-
-  updateFilteredAuctions(): void {
-    this.filteredCurrentAuctions = [...this.currentAuctions];
-    this.filteredUpcomingAuctions = [...this.upcomingAuctions];
   }
 
   updateTimers(): void {
@@ -217,9 +157,20 @@ export class DashboardComponent implements OnInit, OnDestroy {
     }
   }
 
-  onBid(auction: Auction): void {
-    alert(`Reminder set for auction: ${auction.title}`);
+  viewAuctionDetail(auction: Auction): void {
+    this.router.navigate(['./auction-detail'], {
+      state: { auction, auctions: this.currentAuctions },
+    });
   }
+
+  onBid(auction: Auction): void {
+    console.log(`Reminder clicked for auction: ${auction.title}`);
+    this.snackBar.open(
+      `Reminder set successfully for "${auction.title}". We'll notify you before it starts!`,
+      'Close',
+      { duration: 3000 }
+    );
+  }  
 
   logout(): void {
     this.router.navigate(['/']);

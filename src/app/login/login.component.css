@@ -518,3 +518,35 @@ button:hover::after {
       transition: none !important;
     }
   }
+  /* Login as Administrator */
+.admin-login-link {
+  display: block;
+  text-align: center;
+  margin-top: 1rem;
+  color: var(--accent-color);
+  font-weight: 700;
+  text-decoration: none;
+  font-size: 1 rem;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.admin-login-link:hover {
+  color: var(--success-color);
+  transform: translateY(-2px);
+  text-shadow: 0 2px 4px rgba(157, 0, 255, 0.2);
+}
+
+.admin-login-link::after {
+  content: '';
+  display: block;
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(90deg, var(--accent-color), var(--success-color));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s ease-in-out;
+}
+
+.admin-login-link:hover::after {
+  transform: scaleX(1);
+}
