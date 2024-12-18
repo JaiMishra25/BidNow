@@ -673,3 +673,21 @@ body {
 .cancel-btn:hover {
   background-color: #c0392b;
 }
+
+.footer-btn {
+  background-color:  #951AE4;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+}
+.abt{
+  background-color: #9F1AF3;
+}
+.sprt{
+  background-color: #9A1AEB;
+}
+

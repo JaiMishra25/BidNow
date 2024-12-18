@@ -92,29 +92,30 @@
     <div class="footer-section">
       <h3>About Us</h3>
       <ul>
-        <li><a href="#">Our Story</a></li>
-        <li><a href="#">Team</a></li>
-        <li><a href="#">Careers</a></li>
+        <li><button class="footer-btn abt" (click)="router.navigate(['/about-us'])">Our Story</button></li>
+        <li><button class="footer-btn abt" (click)="router.navigate(['/about-us'])">Team</button></li>
+        <li><button class="footer-btn abt" (click)="router.navigate(['/about-us'])">Careers</button></li>
       </ul>
+      
     </div>
     <div class="footer-section">
       <h3>Support</h3>
       <ul>
-        <li><a href="#">Help Center</a></li>
-        <li><a href="#">Contact Us</a></li>
-        <li><a href="#">FAQ</a></li>
+        <li><button class="footer-btn sprt" (click)="router.navigate(['/support'])">Help Center</button></li>
+        <li><button class="footer-btn sprt" (click)="router.navigate(['/support'])">Contact Us</button></li>
+        <li><button class="footer-btn sprt" (click)="router.navigate(['/support'])">FAQ</button></li>
       </ul>
     </div>
     <div class="footer-section">
       <h3>Legal</h3>
       <ul>
-        <li><a href="#">Privacy Policy</a></li>
-        <li><a href="#">Terms of Service</a></li>
-        <li><a href="#">Cookie Policy</a></li>
+        <li><button class="footer-btn lgl" (click)="router.navigate(['/legal'])">Privacy Policy</button></li>
+        <li><button class="footer-btn lgl" (click)="router.navigate(['/legal'])">Terms of Service</button></li>
+        <li><button class="footer-btn lgl" (click)="router.navigate(['/legal'])">Cookie Policy</button></li>
       </ul>
     </div>
   </div>
   <div class="footer-bottom">
     <p>© 2024 BidNow. All rights reserved.</p>
-  </div>
+  </div> 
 </footer>

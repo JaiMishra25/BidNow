@@ -10,7 +10,13 @@
     
     <div class="nav-middle">
       @for (link of navLinks; track link.path) {
-        <a [routerLink]="link.path" class="nav-link">{{link.label}}</a>
+        <a 
+          href="javascript:void(0)" 
+          (click)="scrollToSection(link.sectionId)" 
+          class="nav-link"
+        >
+          {{link.label}}
+        </a>
       }
     </div>
 
@@ -73,7 +79,7 @@
   </div>
 
   <!-- Categories Section -->
-  <div class="categories-section">
+  <div id="categories-section" class="categories-section">
     <h2>Explore Categories</h2>
     <p class="section-subtitle">Find exactly what you're looking for</p>
     <div class="categories-grid">
@@ -88,7 +94,7 @@
   </div>
 
   <!-- Featured Auctions -->
-  <div class="featured-section">
+  <div id="featured-section" class="featured-section">
     <h2>Featured Auctions</h2>
     <p class="section-subtitle">Don't miss these amazing opportunities</p>
     <div class="auctions-grid">
@@ -115,7 +121,7 @@
   </div>
 
   <!-- How It Works Section -->
-  <div class="how-it-works">
+  <div id="how-it-works" class="how-it-works">
     <h2>How It Works</h2>
     <p class="section-subtitle">Start bidding in just a few simple steps</p>
     <div class="steps-grid">
@@ -143,7 +149,7 @@
   </div>
 
   <!-- Newsletter Section -->
-  <div class="newsletter-section">
+  <div id="newsletter-section" class="newsletter-section">
     <div class="newsletter-content">
       <h2>Stay Updated</h2>
       <p>Subscribe to our newsletter for exclusive auctions and offers</p>

@@ -12,9 +12,10 @@ import { AdminLoginComponent } from './admin-login/admin-login.component';
 import { UserDetailComponent } from './user-detail/user-detail.component';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { AuctionService } from './auction.service';
-import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { provideAnimations } from '@angular/platform-browser/animations';
+import { AboutUsComponent } from './about-us/about-us.component';
+import { SupportComponent } from './support/support.component';
+import { LegalComponent } from './legal/legal.component';
 
 const routes: Routes = [
   { path: '', component: HomePageComponent },
@@ -28,6 +29,9 @@ const routes: Routes = [
   { path: 'auction-detail/:id', component: AuctionDetailComponent },
   { path: 'admin-dashboard/charts', component: AdminDashboardChartsComponent },
   { path: 'user-detail/:id', component: UserDetailComponent },
+  { path: 'about-us', component: AboutUsComponent },
+  { path: 'support', component: SupportComponent },
+  { path: 'legal', component: LegalComponent },
   { path: '**', redirectTo: '', pathMatch: 'full' },
 ];
 

@@ -48,7 +48,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   showAddAuctionForm: boolean = false;
 
   constructor(
-    private router: Router,
+    public router: Router,
     private snackBar: MatSnackBar,
     private auctionService: AuctionService // Inject AuctionService
   ) {}

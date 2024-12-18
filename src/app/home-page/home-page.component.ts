@@ -23,11 +23,6 @@ export class HomePageComponent {
   isNavbarFixed = false;
   searchQuery: string = '';
   currentYear = new Date().getFullYear();
-  
-  @HostListener('window:scroll')
-  onWindowScroll() {
-    this.isNavbarFixed = window.scrollY > 100;
-  }
 
   featuredAuctions: FeaturedAuction[] = [
     {
@@ -64,12 +59,24 @@ export class HomePageComponent {
   ];
 
   navLinks = [
-    { path: '/auctions', label: 'Auctions' },
-    { path: '/categories', label: 'Categories' },
-    { path: '/how-it-works', label: 'How It Works' },
-    { path: '/about', label: 'About' },
-    { path: '/contact', label: 'Contact' }
+    { path: 'auctions', label: 'Auctions', sectionId: 'featured-section' },
+    { path: 'categories', label: 'Categories', sectionId: 'categories-section' },
+    { path: 'how-it-works', label: 'How It Works', sectionId: 'how-it-works' },
+    { path: 'about', label: 'About', sectionId: 'about-section' },
+    { path: 'contact', label: 'Contact', sectionId: 'newsletter-section' }
   ];
+
+  scrollToSection(sectionId: string): void {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  }
+
+  @HostListener('window:scroll')
+  onWindowScroll() {
+    this.isNavbarFixed = window.scrollY > 100;
+  }
 
   footerLinks = {
     about: [
