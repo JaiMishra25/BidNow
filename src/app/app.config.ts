@@ -16,6 +16,9 @@ import { provideAnimations } from '@angular/platform-browser/animations';
 import { AboutUsComponent } from './about-us/about-us.component';
 import { SupportComponent } from './support/support.component';
 import { LegalComponent } from './legal/legal.component';
+import { SellerLoginComponent } from './seller-login/seller-login.component';
+import { DisputesComponent } from './disputes/disputes.component';
+
 
 const routes: Routes = [
   { path: '', component: HomePageComponent },
@@ -32,6 +35,8 @@ const routes: Routes = [
   { path: 'about-us', component: AboutUsComponent },
   { path: 'support', component: SupportComponent },
   { path: 'legal', component: LegalComponent },
+  { path: 'seller-login', component: SellerLoginComponent },
+  { path: 'disputes', component: DisputesComponent },
   { path: '**', redirectTo: '', pathMatch: 'full' },
 ];
 

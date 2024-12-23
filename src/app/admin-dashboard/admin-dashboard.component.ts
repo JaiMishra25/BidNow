@@ -22,10 +22,20 @@ interface User {
   email: string;
 }
 
+interface Dispute {
+  id: string;
+  auctionTitle: string;
+  reason: string;
+  status: 'open' | 'resolved';
+}
+
 interface Stats {
   totalUsers: number;
   totalAuctions: number;
   activeBids: number;
+  totalDisputes: number;
+  openDisputes: number;
+  resolvedDisputes: number;
 }
 
 @Component({
@@ -40,7 +50,8 @@ export class AdminDashboardComponent implements OnInit {
   filteredCurrentAuctions: Auction[] = [];
   approvedAuctions: Auction[] = [];
   rejectedAuctions: Auction[] = [];
-
+  disputes: Dispute[] = []; // New property for disputes
+  filteredDisputes: Dispute[] = [];
   showAddAuctionForm: boolean = false;
   newAuction: Auction = { 
     id: `auction_${Date.now()}`, 
@@ -52,13 +63,22 @@ export class AdminDashboardComponent implements OnInit {
     status: 'ongoing' 
   };
   auctionImage: File | null = null;
-  selectedFilter: 'current' | 'upcoming' | 'past' = 'current'; // Timeframe filter
+  selectedFilter: 'current' | 'upcoming' | 'past' = 'current';
+  selectedDisputeStatus: 'all' | 'open' | 'resolved' = 'all'; // New filter for disputes
   searchQuery: string = '';
+  disputeSearchQuery: string = ''; // New property for searching disputes
   users: User[] = [
     { name: 'John Doe', email: 'john.doe@example.com' },
     { name: 'Jane Smith', email: 'jane.smith@example.com' },
-  ];  // Mock users for demonstration
-  stats: Stats = { totalUsers: this.users.length, totalAuctions: 20, activeBids: 10 }; // Mock stats for dashboard
+  ];
+  stats: Stats = { 
+    totalUsers: this.users.length, 
+    totalAuctions: 20, 
+    activeBids: 10, 
+    totalDisputes: 5, 
+    openDisputes: 3, 
+    resolvedDisputes: 2 
+  };
 
   // Injecting the AuctionService
   private auctionService = inject(AuctionService);
@@ -67,7 +87,9 @@ export class AdminDashboardComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadAuctions();
-    this.applyFilters(); // Apply default filter
+    this.loadDisputes(); // Load disputes data
+    this.applyFilters();
+    this.filterDisputes(); // Apply default dispute filter
   }
 
   loadAuctions(): void {
@@ -186,6 +208,56 @@ export class AdminDashboardComponent implements OnInit {
     this.router.navigate(['/admin-dashboard/charts']);
   }
   
+  navigateToDisputes():void{
+    this.router.navigate(['/disputes']);
+  }
+
+  loadDisputes(): void {
+    // Mock disputes data
+    this.disputes = [
+      { id: 'dispute_1', auctionTitle: 'Antique Vase Auction', reason: 'Misleading description', status: 'open' },
+      { id: 'dispute_2', auctionTitle: 'Vintage Watch Auction', reason: 'Delayed shipping', status: 'resolved' },
+      { id: 'dispute_3', auctionTitle: 'Car Auction', reason: 'Payment issue', status: 'open' },
+    ];
+    this.filterDisputes();
+  }
+
+  filterDisputes(): void {
+    if (this.selectedDisputeStatus === 'all') {
+      this.filteredDisputes = this.disputes;
+    } else {
+      this.filteredDisputes = this.disputes.filter(
+        (dispute) => dispute.status === this.selectedDisputeStatus
+      );
+    }
+  }
+
+  searchDisputes(): void {
+    this.filteredDisputes = this.disputes.filter((dispute) =>
+      dispute.auctionTitle.toLowerCase().includes(this.disputeSearchQuery.toLowerCase())
+    );
+  }
+
+  resolveDispute(dispute: Dispute): void {
+    dispute.status = 'resolved';
+    this.stats.openDisputes--;
+    this.stats.resolvedDisputes++;
+    this.snackBar.open(`Dispute for "${dispute.auctionTitle}" resolved successfully!`, 'Close', {
+      duration: 3000,
+      verticalPosition: 'top',
+      horizontalPosition: 'center',
+    });
+    this.filterDisputes();
+  }
+
+  escalateDispute(dispute: Dispute): void {
+    this.snackBar.open(`Dispute for "${dispute.auctionTitle}" escalated for further review.`, 'Close', {
+      duration: 3000,
+      verticalPosition: 'top',
+      horizontalPosition: 'center',
+    });
+  }
+
 
   logout(): void {
     this.router.navigate(['/']);

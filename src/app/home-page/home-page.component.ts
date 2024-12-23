@@ -80,22 +80,22 @@ export class HomePageComponent {
 
   footerLinks = {
     about: [
-      { label: 'About Us', path: '/about' },
-      { label: 'Careers', path: '/careers' },
-      { label: 'Press', path: '/press' },
-      { label: 'Blog', path: '/blog' }
+      { label: 'About Us', path: '/about-us' },
+      { label: 'Careers', path: '/about-us' },
+      { label: 'Press', path: '/about-us' },
+      { label: 'Blog', path: '/about-us' }
     ],
     support: [
-      { label: 'Help Center', path: '/help' },
-      { label: 'Safety Center', path: '/safety' },
-      { label: 'Community Guidelines', path: '/guidelines' },
-      { label: 'Contact Us', path: '/contact' }
+      { label: 'Help Center', path: '/support' },
+      { label: 'Safety Center', path: '/support' },
+      { label: 'Community Guidelines', path: '/support' },
+      { label: 'Contact Us', path: '/support' }
     ],
     legal: [
-      { label: 'Terms of Service', path: '/terms' },
-      { label: 'Privacy Policy', path: '/privacy' },
-      { label: 'Cookie Policy', path: '/cookies' },
-      { label: 'Auction Rules', path: '/rules' }
+      { label: 'Terms of Service', path: '/legal' },
+      { label: 'Privacy Policy', path: '/legal' },
+      { label: 'Cookie Policy', path: '/legal' },
+      { label: 'Auction Rules', path: '/legal' }
     ]
   };
 

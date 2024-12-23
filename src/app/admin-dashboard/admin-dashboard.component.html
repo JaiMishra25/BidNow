@@ -118,6 +118,14 @@
     </div>
 </div>
 
+<!-- Dispute Resolution Section -->
+<div class="dashboard-disputes">
+    <h2>Disputes</h2>
+    <p><strong> Disputes: {{ stats.totalDisputes }}</strong></p>
+    <p><strong>Open Disputes: {{ stats.openDisputes }}</strong></p>
+    <button class="action-btn" (click)="navigateToDisputes()">Manage Disputes</button>
+  </div>  
+
 <!-- Logs and Analytics -->
 <div class="logs-analytics">
     <h2>Activity Logs and Analytics</h2>
