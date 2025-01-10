@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Component({
   standalone: true,
@@ -30,7 +31,7 @@ export class RegisterComponent {
     number: false,
   };
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private http: HttpClient) {}
 
   // Validate password dynamically
   validatePassword(password: string) {
@@ -55,18 +56,40 @@ export class RegisterComponent {
     // Add loading state
     this.isLoading = true;
 
-    // Simulate API call
-    setTimeout(() => {
-      this.successMessage = 'Registration successful!';
-      this.errorMessage = '';
-      
-      // Reset loading state
-      this.isLoading = false;
+    // Prepare data for API call
+    const userData = {
+      name: this.name,
+      email: this.email,
+      password: this.password,
+    };
 
-      // Navigate to login page after successful registration
-      setTimeout(() => {
-        this.router.navigate(['/dashboard']);
-      }, 1500);
-    }, 1500); // Simulate 1.5s API call
+    // Make API call to the backend
+    this.http.post('http://localhost:3000/register', userData, {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+    }).subscribe({
+      next: (response: any) => {
+        // Handle success response
+        this.successMessage = 'Registration successful!';
+        this.errorMessage = '';
+        this.isLoading = false;
+    
+        // Navigate to the login or dashboard page
+        setTimeout(() => {
+          this.router.navigate(['/login']);
+        }, 1500);
+      },
+      error: (error) => {
+        // Check for specific error code (409 Conflict)
+        if (error.status === 409) {
+          this.errorMessage = 'This email is already registered. Please use a different email.';
+        } else {
+          this.errorMessage = error.error?.message || 'Registration failed. Please try again.';
+        }
+        this.successMessage = '';
+        this.isLoading = false;
+      }
+    });
+    
+    
   }
 }

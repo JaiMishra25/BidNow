@@ -37,7 +37,7 @@ export class AdminLoginComponent {
             this.isLoading = false;
         }, 1500);
     }
-
+ 
     togglePasswordVisibility() {
         this.showPassword = !this.showPassword;
     }

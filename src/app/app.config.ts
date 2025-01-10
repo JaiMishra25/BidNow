@@ -18,7 +18,7 @@ import { SupportComponent } from './support/support.component';
 import { LegalComponent } from './legal/legal.component';
 import { SellerLoginComponent } from './seller-login/seller-login.component';
 import { DisputesComponent } from './disputes/disputes.component';
-
+import { provideHttpClient } from '@angular/common/http';
 
 const routes: Routes = [
   { path: '', component: HomePageComponent },
@@ -43,8 +43,10 @@ const routes: Routes = [
 export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(routes),
+    
     provideAnimations(),
-    FormsModule,  
+    FormsModule,
+    provideHttpClient(),
     CommonModule  
   ],
 };

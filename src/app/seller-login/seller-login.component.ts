@@ -27,15 +27,15 @@ export class SellerLoginComponent implements OnInit {
 
     // Simulated credentials for both user and admin
     private userCredentials: LoginCredentials[] = [
-        { email: 'user@example.com', password: 'password123' },
-        { email: 'user2@example.com', password: 'mypassword456' },
-        { email: 'user3@example.com', password: 'securepass789' },
-        { email: 'user4@example.com', password: 'userpass321' },
-        { email: 'user5@example.com', password: 'guestuser123' },
-        { email: 'seller@example.com', password: 'password123'}
+        { email: 'user@example.com', password: 'Password123@' },
+        { email: 'user2@example.com', password: 'Mypassword456@' },
+        { email: 'user3@example.com', password: 'Securepass789@' },
+        { email: 'user4@example.com', password: 'Userpass321@' },
+        { email: 'user5@example.com', password: 'Guestuser123@' },
+        { email: 'seller@example.com', password: 'Password123@'}
     ];
     private adminCredentials: LoginCredentials[] = [
-        { email: 'admin@example.com', password: 'admin123' },
+        { email: 'admin@example.com', password: 'Admin123@' },
     ];
 
     constructor(private router: Router) {}
