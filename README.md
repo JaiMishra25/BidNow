@@ -1,27 +1,65 @@
-# BidNow
+# BidNow – Real-Time Auction Platform
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.12.
+**BidNow** is a robust full-stack auction platform enabling real-time bidding, secure user authentication, and powerful admin analytics for seamless auction management.
 
-## Development server
+![Home Page](public/screenshots/home-page.png)
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+---
 
-## Code scaffolding
+## 🚀 Features
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+- 🔐 **Secure Login & Registration** with JWT authentication
+- 📊 **Admin Dashboard** with real-time analytics and auction dispute resolution
+- 🧑‍💻 **User Dashboard** showing active, won, and past auctions
+- 📈 Handles **50+ concurrent users** per auction and **100+ active auctions**
 
-## Build
+---
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+## 🛠️ Tech Stack
 
-## Running unit tests
+- **Frontend**: Angular
+- **Backend**: Node.js, Express.js
+- **Database**: MongoDB
+- **Authentication**: JWT
+- **APIs**: REST
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+---
 
-## Running end-to-end tests
+## 📸 Screenshots
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+| Feature              | Preview |
+|----------------------|---------|
+| **Home Page**        | ![](public/screenshots/home-page.png) |
+| **Login Page**       | ![](public/screenshots/login-page.png) |
+| **Register Page**    | ![](public/screenshots/register-page.png) |
+| **User Dashboard**   | ![](public/screenshots/user-dashboard.png) |
+| **Admin Dashboard**  | ![](public/screenshots/admin-dashboard.png) |
+| **Analytics**        | ![](public/screenshots/admin-analytics.png) |
 
-## Further help
+---
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+## 📈 Admin Analytics
+
+- Track all running, pending, and completed auctions
+- View real-time user engagement and bid metrics
+- Resolve disputes with an integrated support interface
+
+---
+
+## 👤 Test Users
+
+Supports login for **20+ test users** with role-based access (admin/user).
+
+---
+
+## 📬 Contact
+
+Feel free to connect if you’d like to learn more or collaborate:
+
+- 📧 jaimishra502@gmail.com  
+- 💼 [LinkedIn](https://www.linkedin.com/in/JaiMishra25)  
+- 🛠️ [GitHub](https://github.com/JaiMishra25)
+
+---
+
+> © 2025 Jai Mishra. All rights reserved.
